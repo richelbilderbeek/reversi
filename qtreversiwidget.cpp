@@ -1,9 +1,6 @@
-
-
-
-
 #include "qtreversiwidget.h"
 
+#include <algorithm>
 #include <cstdlib>
 
 #include <QMouseEvent>
@@ -15,23 +12,46 @@
 #include "reversimove.h"
 
 
-
 ribi::reversi::QtWidget::QtWidget(QWidget* parent, Qt::WindowFlags f)
   : QWidget(parent,f),
     m_reversi(new Widget(4)),
     m_color_player1(    QColor(255,  0,  0)),
     m_color_player2(    QColor(  0,  0,255)),
     m_color_square_even(QColor( 32, 32, 32)),
-    m_color_square_odd( QColor( 64, 64, 64))
+    m_color_square_odd( QColor( 64, 64, 64)),
+    m_show_valid_moves{false}
 {
   //Allows this widget to respond to mouse moving over it
   this->setMouseTracking(true);
 }
 
+void ribi::reversi::QtWidget::NewGame(const int size)
+{
+  m_reversi.reset(new Widget(size));
+  update();
+  emit signal_changed();
+}
+
+void ribi::reversi::QtWidget::Pass()
+{
+  const boost::shared_ptr<MovePass> move{new MovePass};
+  m_reversi->DoMove(move);
+  update();
+  emit signal_changed();
+}
+
+void ribi::reversi::QtWidget::SetShowValidMoves(const bool show) noexcept
+{
+  m_show_valid_moves = show;
+  update();
+}
+
 void ribi::reversi::QtWidget::mousePressEvent(QMouseEvent * e)
 {
-  const int x = (e->x() * m_reversi->GetBoard()->GetSize()) / this->width();
-  const int y = (e->y() * m_reversi->GetBoard()->GetSize()) / this->height();
+  const int sz = m_reversi->GetBoard()->GetSize();
+  const int x = (e->pos().x() * sz) / this->width();
+  const int y = (e->pos().y() * sz) / this->height();
+  if (x < 0 || y < 0 || x >= sz || y >= sz) return;
 
   const boost::shared_ptr<MovePlacePiece> move {
     new MovePlacePiece(x,y)
@@ -40,7 +60,8 @@ void ribi::reversi::QtWidget::mousePressEvent(QMouseEvent * e)
   if (m_reversi->CanDoMove(move))
   {
      m_reversi->DoMove(move);
-     repaint();
+     update();
+     emit signal_changed();
   }
 }
 
@@ -70,6 +91,21 @@ void ribi::reversi::QtWidget::paintEvent(QPaintEvent *)
       }
       painter.setBrush(brush);
       painter.drawRect(x1,y1,x2-x1,y2-y1);
+    }
+  }
+  if (m_show_valid_moves)
+  {
+    const Player player = m_reversi->GetCurrentPlayer();
+    brush.setColor(player == Player::player1 ? m_color_player1 : m_color_player2);
+    painter.setBrush(brush);
+    for (const auto& p: m_reversi->GetBoard()->GetValidMoves(player))
+    {
+      const int x1 = (width  * (p.first  + 0)) / sz;
+      const int x2 = (width  * (p.first  + 1)) / sz;
+      const int y1 = (height * (p.second + 0)) / sz;
+      const int y2 = (height * (p.second + 1)) / sz;
+      const int r = std::max(2, (x2 - x1) / 8);
+      painter.drawEllipse(QPoint((x1 + x2) / 2, (y1 + y2) / 2), r, r);
     }
   }
 }

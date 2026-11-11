@@ -16,3 +16,5 @@ CI
 codecov
 io
 Gameplay
+WebAssembly
+Emscripten

@@ -9,3 +9,4 @@ and one of
 
 - [Building](build.md)
 - [Manual](manual.md)
+- [Play it](play.md)

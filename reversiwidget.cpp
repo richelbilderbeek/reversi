@@ -12,7 +12,11 @@
 #include "reversimove.h"
 #include "reversiboard.h"
 #include "reversiplayer.h"
+//Define REVERSI_NO_TEXTCANVAS to build without RibiClasses,
+//for example for the WebAssembly version
+#ifndef REVERSI_NO_TEXTCANVAS
 #include "textcanvas.h"
+#endif
 
 
 ribi::reversi::Widget::Widget(const int size)
@@ -201,6 +205,7 @@ void ribi::reversi::Widget::TogglePlayer()
   }
 }
 
+#ifndef REVERSI_NO_TEXTCANVAS
 const boost::shared_ptr<ribi::TextCanvas> ribi::reversi::Widget::ToTextCanvas() const noexcept
 {
   const int n_rows = m_board->GetSize();
@@ -229,6 +234,7 @@ const boost::shared_ptr<ribi::TextCanvas> ribi::reversi::Widget::ToTextCanvas() 
   canvas->PutChar(m_x,m_y,d);
   return canvas;
 }
+#endif // REVERSI_NO_TEXTCANVAS
 
 void ribi::reversi::Widget::Undo()
 {

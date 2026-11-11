@@ -1,10 +1,6 @@
 #ifndef QTREVERSIWIDGET_H
 #define QTREVERSIWIDGET_H
 
-
-
-
-
 #include <boost/shared_ptr.hpp>
 
 #include <QWidget>
@@ -18,9 +14,23 @@ class QtWidget : public QWidget
 {
   Q_OBJECT
 public:
-  explicit QtWidget(QWidget* parent = 0, Qt::WindowFlags f = 0);
+  explicit QtWidget(QWidget* parent = 0, Qt::WindowFlags f = Qt::WindowFlags());
+
+  ///The game being played
+  const Widget& GetGame() const noexcept { return *m_reversi; }
+
+  ///Start a new game on a board of size x size squares
+  void NewGame(const int size);
+
+  ///Let the current player pass
+  void Pass();
+
+  ///Show the squares the current player can play at
+  void SetShowValidMoves(const bool show) noexcept;
 
 signals:
+  ///Emitted after each move or new game
+  void signal_changed();
 
 private:
   boost::shared_ptr<Widget> m_reversi;
@@ -28,6 +38,7 @@ private:
   QColor m_color_player2;
   QColor m_color_square_even;
   QColor m_color_square_odd;
+  bool m_show_valid_moves;
   void mousePressEvent(QMouseEvent * e);
   void paintEvent(QPaintEvent *);
 };

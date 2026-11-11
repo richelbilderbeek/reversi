@@ -9,7 +9,11 @@
 
 
 
+//Define REVERSI_NO_TEXTCANVAS to build without RibiClasses,
+//for example for the WebAssembly version
+#ifndef REVERSI_NO_TEXTCANVAS
 #include "textcanvas.h"
+#endif
 
 
 
@@ -252,6 +256,7 @@ void ribi::reversi::Board::Set(const int x, const int y, const Square state) noe
   assert(Get(x,y)==state);
 }
 
+#ifndef REVERSI_NO_TEXTCANVAS
 const boost::shared_ptr<ribi::TextCanvas> ribi::reversi::Board::ToTextCanvas() const noexcept
 {
   const int n_rows = static_cast<int>(m_board.size());
@@ -285,6 +290,7 @@ const boost::shared_ptr<ribi::TextCanvas> ribi::reversi::Board::ToTextCanvas() c
   }
   return canvas;
 }
+#endif // REVERSI_NO_TEXTCANVAS
 
 bool ribi::reversi::operator==(const ribi::reversi::Board& lhs, const ribi::reversi::Board& rhs)
 {
