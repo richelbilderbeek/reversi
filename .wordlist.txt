@@ -1,0 +1,17 @@
+Bilderbeek
+Bilderbeek's
+Codecov
+Qt
+Reversi
+Richel
+Richèl
+GitHub
+Zensical
+qmake
+RibiClasses
+DotMatrix
+RibiLibraries
+Travis
+CI
+codecov
+io
