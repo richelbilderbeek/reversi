@@ -13,6 +13,7 @@
 //for example for the WebAssembly version
 #ifndef REVERSI_NO_TEXTCANVAS
 #include "textcanvas.h"
+#include <random>
 #endif
 
 
@@ -52,7 +53,7 @@ bool ribi::reversi::Board::CanDoMove(const int x, const int y, const Player play
   assert(x < this->GetSize());
   assert(y < this->GetSize());
   if (Get(x,y) != Square::empty) return false;
-  for (const std::pair<int,int> d: CreateDeltas())
+  for (const std::pair<int,int>& d: CreateDeltas())
   {
     int cur_x = x + d.first;
     int cur_y = y + d.second;
@@ -120,7 +121,7 @@ void ribi::reversi::Board::DoMove(const int x, const int y, const Player player)
 
   //Collect the deltas tomodify the color
   std::vector<std::pair<int,int>> v;
-  for (const std::pair<int,int> d: CreateDeltas())
+  for (const std::pair<int,int>& d: CreateDeltas())
   {
     int cur_x = x + d.first;
     int cur_y = y + d.second;
@@ -149,7 +150,7 @@ void ribi::reversi::Board::DoMove(const int x, const int y, const Player player)
   }
   assert(!v.empty());
 
-  for (const std::pair<int,int> d: v)
+  for (const std::pair<int,int>& d: v)
   {
     int cur_x = x + d.first;
     int cur_y = y + d.second;

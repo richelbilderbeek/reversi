@@ -11,6 +11,7 @@
 #include "reversiwidget.h"
 #include "reversimove.h"
 #include "fileio.h"
+#include <random>
 
 
 
@@ -36,7 +37,7 @@ void ribi::reversi::MainDialog::Execute(const int size)
     {
       std::cout << '\n'
         << "List of all possible moves:\n";
-      for (const boost::shared_ptr<Move> move: w.GetValidMoves())
+      for (const boost::shared_ptr<Move>& move: w.GetValidMoves())
       {
         std::cout << move->ToStr() << '\n';
       }

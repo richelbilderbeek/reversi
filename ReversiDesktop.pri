@@ -1,13 +1,13 @@
-include(../Reversi/ReversiConsole.pri)
+include($$PWD/ReversiConsole.pri)
 
 FORMS += \
-    ../Reversi/qtreversimaindialog.ui \
-    ../Reversi/qtreversimenudialog.ui
+    $$PWD/qtreversimaindialog.ui \
+    $$PWD/qtreversimenudialog.ui
 
 SOURCES += \
-    ../Reversi/qtreversimaindialog.cpp \
-    ../Reversi/qtreversimenudialog.cpp
+    $$PWD/qtreversimaindialog.cpp \
+    $$PWD/qtreversimenudialog.cpp
 
 HEADERS += \
-    ../Reversi/qtreversimaindialog.h \
-    ../Reversi/qtreversimenudialog.h
+    $$PWD/qtreversimaindialog.h \
+    $$PWD/qtreversimenudialog.h

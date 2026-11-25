@@ -3,6 +3,7 @@
 #include "reversiboard.h"
 
 #include <boost/test/unit_test.hpp>
+#include <random>
 
 
 using namespace ribi::reversi;
@@ -26,7 +27,7 @@ BOOST_AUTO_TEST_CASE(reversi_widget)
         r.GetValidMoves()
       };
       assert(!m.empty());
-      std::random_shuffle(m.begin(),m.end());
+      std::shuffle(m.begin(),m.end(),std::mt19937{std::random_device{}()});
       const boost::shared_ptr<ribi::reversi::Move> move = m[0];
       assert(r.CanDoMove(move));
       r.DoMove(move);
@@ -45,7 +46,7 @@ BOOST_AUTO_TEST_CASE(reversi_widget)
         r.GetValidMoves()
       };
       assert(!m.empty());
-      std::random_shuffle(m.begin(),m.end());
+      std::shuffle(m.begin(),m.end(),std::mt19937{std::random_device{}()});
       const boost::shared_ptr<ribi::reversi::Move> move = m[0];
       assert(move);
       assert(r.CanDoMove(move));
@@ -73,7 +74,7 @@ BOOST_AUTO_TEST_CASE(reversi_widget)
         r.GetValidMoves()
       };
       assert(!m.empty());
-      std::random_shuffle(m.begin(),m.end());
+      std::shuffle(m.begin(),m.end(),std::mt19937{std::random_device{}()});
       const boost::shared_ptr<ribi::reversi::Move> move = m[0];
       assert(move);
       assert(r.CanDoMove(move));

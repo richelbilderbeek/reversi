@@ -16,6 +16,7 @@
 //for example for the WebAssembly version
 #ifndef REVERSI_NO_TEXTCANVAS
 #include "textcanvas.h"
+#include <random>
 #endif
 
 
@@ -145,7 +146,7 @@ ribi::reversi::Player ribi::reversi::Widget::GetOtherPlayer() const noexcept
 const std::vector<boost::shared_ptr<ribi::reversi::Move>> ribi::reversi::Widget::GetValidMoves() const noexcept
 {
   std::vector<boost::shared_ptr<Move>> moves;
-  for (const std::pair<int,int> p: m_board->GetValidMoves(GetCurrentPlayer()))
+  for (const std::pair<int,int>& p: m_board->GetValidMoves(GetCurrentPlayer()))
   {
     const boost::shared_ptr<Move> move {
       new MovePlacePiece(p.first,p.second)
