@@ -9,7 +9,7 @@
 
 
 
-//Define REVERSI_NO_TEXTCANVAS to build without RibiClasses,
+//Define REVERSI_NO_TEXTCANVAS to build without the TextCanvas class,
 //for example for the WebAssembly version
 #ifndef REVERSI_NO_TEXTCANVAS
 #include "textcanvas.h"

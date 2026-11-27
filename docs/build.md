@@ -8,8 +8,9 @@ Get these other repositories by running, from the project root:
 ./download_other_githubs
 ```
 
-This clones DotMatrix, plane, RibiClasses and RibiLibraries
+This clones DotMatrix, plane and RibiLibraries
 next to this repository.
+The code it uses from RibiClasses is copied into the `ribi_classes` folder.
 
 Then build the desktop version:
 
