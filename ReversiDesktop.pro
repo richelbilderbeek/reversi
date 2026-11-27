@@ -7,7 +7,7 @@ include($$PWD/ribi_classes/CppQtHideAndShowDialog/CppQtHideAndShowDialog.pri)
 
 #Specific, console
 include($$PWD/ribi_classes/CppCanvas/CppCanvas.pri)
-include(../DotMatrix/DotMatrix.pri)
+include($$PWD/dot_matrix/DotMatrix.pri)
 include(Reversi.pri)
 include($$PWD/ribi_classes/CppTextCanvas/CppTextCanvas.pri)
 

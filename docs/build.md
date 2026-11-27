@@ -1,18 +1,14 @@
 # Building
 
-Requires Qt, Boost and some of Richèl Bilderbeek's other repositories.
+Requires Qt and Boost.
 
-Get these other repositories by running, from the project root:
+The code the game uses from Richèl Bilderbeek's other repositories
+is copied into this one:
 
-```bash
-./download_other_githubs
-```
+- [DotMatrix](https://github.com/richelbilderbeek/DotMatrix), in the `dot_matrix` folder
+- [RibiClasses](https://github.com/richelbilderbeek/RibiClasses), in the `ribi_classes` folder
 
-This clones DotMatrix, plane and RibiLibraries
-next to this repository.
-The code it uses from RibiClasses is copied into the `ribi_classes` folder.
-
-Then build the desktop version:
+Build the desktop version:
 
 ```bash
 qmake ReversiDesktop.pro
